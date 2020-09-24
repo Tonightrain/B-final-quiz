@@ -18,11 +18,16 @@ public class TrainerService {
 
     public TrainerService(TrainerRepository trainerRepository){
         this.trainerRepository = trainerRepository;
+        trainerRepository.save(TrainerEntity.builder().name("张老师").build());
+        trainerRepository.save(TrainerEntity.builder().name("杜老师").build());
+        trainerRepository.save(TrainerEntity.builder().name("董老师").build());
+        trainerRepository.save(TrainerEntity.builder().name("王老师").build());
     }
 
-    public TrainerEntity addTrainer(Trainer trainer) {
-        TrainerEntity trainerEntity = Converter.trainerConvertToTrainerEntity(trainer);
-        return trainerRepository.save(trainerEntity);
+    public List<TrainerEntity> addTrainer(String name) {
+        TrainerEntity trainerEntity = TrainerEntity.builder().name(name).build();
+        trainerRepository.save(trainerEntity);
+        return trainerRepository.findAll();
     }
 
     public void deleteTrainer(long id) {

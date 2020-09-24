@@ -3,6 +3,7 @@ package com.example.demo.api;
 import com.example.demo.exception.ErrorResult;
 import com.example.demo.exception.TraineeIsNotExistException;
 import com.example.demo.exception.TrainerIsNotExistException;
+import com.example.demo.exception.TrainerNumberIsLessThanTwoException;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,14 @@ public class GlobalHandlerException {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 
+    @ExceptionHandler(TrainerNumberIsLessThanTwoException.class)
+    public ResponseEntity<ErrorResult> handleTrainer(TrainerNumberIsLessThanTwoException ex){
+        ErrorResult errorResult = ErrorResult.builder()
+                .message(ex.getMessage())
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(Response.SC_BAD_REQUEST)
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
 
 }

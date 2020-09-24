@@ -5,9 +5,11 @@ import com.example.demo.entity.TrainerEntity;
 import com.example.demo.service.TraineeService;
 import com.example.demo.service.TrainerService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -21,8 +23,8 @@ public class TrainerController {
 
     @PostMapping("/trainers")
     @ResponseStatus(HttpStatus.CREATED)
-    public TrainerEntity addTrainer(@RequestBody @Valid Trainer trainer){
-        return trainerService.addTrainer(trainer);
+    public List<TrainerEntity> addTrainer(@RequestBody @NotBlank String name){
+        return trainerService.addTrainer(name);
     }
 
     @DeleteMapping("/trainers/{id}")

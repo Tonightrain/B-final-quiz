@@ -9,4 +9,5 @@ public class ErrorMessage {
     public static final String ZOOM_ID_INVALID = "zoomId should not be null";
     public static final String TRAINEE_NOT_FOUND = "trainee is not exist";
     public static final String TRAINER_NOT_FOUND = "trainer is not exist";
+    public static final String TRAINER_NUMBER_LESS = "trainer number is less than two";
 }

@@ -18,6 +18,27 @@ public class TraineeService {
 
     public TraineeService(TraineeRepository traineeRepository){
         this.traineeRepository = traineeRepository;
+        traineeRepository.save(TraineeEntity.builder()
+                .name("迈克")
+                .office("西安")
+                .email("805560812@qq.com")
+                .github("http://github1.com")
+                .zoomId("666")
+                .build());
+        traineeRepository.save(TraineeEntity.builder()
+                .name("黛西")
+                .office("武汉")
+                .email("602560812@qq.com")
+                .github("http://github2.com")
+                .zoomId("888")
+                .build());
+        traineeRepository.save(TraineeEntity.builder()
+                .name("杰瑞")
+                .office("程度")
+                .email("965260812@qq.com")
+                .github("http://github3.com")
+                .zoomId("999")
+                .build());
     }
 
     public TraineeEntity addTrainee(Trainee trainee) {
