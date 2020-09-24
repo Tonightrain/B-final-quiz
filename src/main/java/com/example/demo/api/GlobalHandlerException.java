@@ -67,10 +67,10 @@ public class GlobalHandlerException {
     public ResponseEntity<ErrorResult> handleGroup(GroupIsNotExistException ex){
         ErrorResult errorResult = ErrorResult.builder()
                 .message(ex.getMessage())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .status(Response.SC_BAD_REQUEST)
+                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(Response.SC_NOT_FOUND)
                 .build();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 
 }
