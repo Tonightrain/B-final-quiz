@@ -33,4 +33,11 @@ public class Converter {
                 .name(trainer.getName())
                 .build();
     }
+
+    public static Trainer trainerEntityConvertToTrainer(TrainerEntity trainerEntity) {
+        return Trainer.builder()
+                .id(trainerEntity.getId())
+                .name(trainerEntity.getName())
+                .build();
+    }
 }

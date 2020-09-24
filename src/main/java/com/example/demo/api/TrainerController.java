@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:1234")
@@ -28,6 +29,12 @@ public class TrainerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTrainer(@PathVariable long id){
         trainerService.deleteTrainer(id);
+    }
+
+    @GetMapping("/trainers")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Trainer> getAllTrainer() {
+        return trainerService.getAllTrainer();
     }
 
 }
