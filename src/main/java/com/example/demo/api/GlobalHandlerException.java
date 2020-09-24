@@ -2,6 +2,7 @@ package com.example.demo.api;
 
 import com.example.demo.exception.ErrorResult;
 import com.example.demo.exception.TraineeIsNotExistException;
+import com.example.demo.exception.TrainerIsNotExistException;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,17 @@ public class GlobalHandlerException {
     }
 
     @ExceptionHandler(TraineeIsNotExistException.class)
-    public ResponseEntity<ErrorResult> handlePerson(TraineeIsNotExistException ex){
+    public ResponseEntity<ErrorResult> handleTrainee(TraineeIsNotExistException ex){
+        ErrorResult errorResult = ErrorResult.builder()
+                .message(ex.getMessage())
+                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(Response.SC_NOT_FOUND)
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
+    }
+
+    @ExceptionHandler(TrainerIsNotExistException.class)
+    public ResponseEntity<ErrorResult> handleTrainer(TrainerIsNotExistException ex){
         ErrorResult errorResult = ErrorResult.builder()
                 .message(ex.getMessage())
                 .error(HttpStatus.NOT_FOUND.getReasonPhrase())
