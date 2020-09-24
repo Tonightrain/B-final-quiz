@@ -30,4 +30,10 @@ public class TraineeController {
         traineeService.deleteTrainee(id);
     }
 
+    @GetMapping("/trainees")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Trainee> getAllTrainees(){
+        return traineeService.getAllTrainees();
+    }
+
 }

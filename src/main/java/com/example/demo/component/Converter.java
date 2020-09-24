@@ -17,6 +17,17 @@ public class Converter {
                 .build();
     }
 
+    public static Trainee traineeEntityConvertToTrainee(TraineeEntity traineeEntity) {
+        return Trainee.builder()
+                .id(traineeEntity.getId())
+                .name(traineeEntity.getName())
+                .office(traineeEntity.getOffice())
+                .email(traineeEntity.getEmail())
+                .github(traineeEntity.getGithub())
+                .zoomId(traineeEntity.getZoomId())
+                .build();
+    }
+
     public static TrainerEntity trainerConvertToTrainerEntity(Trainer trainer){
         return TrainerEntity.builder()
                 .name(trainer.getName())

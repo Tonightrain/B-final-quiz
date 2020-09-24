@@ -7,6 +7,9 @@ import com.example.demo.exception.TraineeIsNotExistException;
 import com.example.demo.repository.TraineeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class TraineeService {
@@ -27,5 +30,13 @@ public class TraineeService {
             throw new TraineeIsNotExistException();
         }
         traineeRepository.deleteById(id);
+    }
+
+    public List<Trainee> getAllTrainees() {
+        List<TraineeEntity> traineeEntityList = traineeRepository.findAll();
+        List<Trainee> traineeList = traineeEntityList.stream()
+                .map((traineeEntity -> Converter.traineeEntityConvertToTrainee(traineeEntity)))
+                .collect(Collectors.toList());
+        return traineeList;
     }
 }
