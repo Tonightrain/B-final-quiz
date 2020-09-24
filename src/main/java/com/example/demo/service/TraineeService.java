@@ -7,7 +7,6 @@ import com.example.demo.exception.TraineeIsNotExistException;
 import com.example.demo.repository.TraineeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class TraineeService {
