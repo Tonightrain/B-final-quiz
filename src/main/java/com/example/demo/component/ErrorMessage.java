@@ -6,6 +6,6 @@ public class ErrorMessage {
     public static final String EMAIL_INVALID = "email should not be null";
     public static final String EMAIL_WRONG_FORMAT = "email format is wrong";
     public static final String GITHUB_INVALID = "github should not be null";
-    public static final String ZOOMID_INVALID = "zoomId should not be null";
-
+    public static final String ZOOM_ID_INVALID = "zoomId should not be null";
+    public static final String TRAINEE_NOT_FOUND = "trainee is not exist";
 }

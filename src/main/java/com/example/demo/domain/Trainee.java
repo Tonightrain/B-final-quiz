@@ -30,6 +30,6 @@ public class Trainee {
     @NotBlank(message = GITHUB_INVALID)
     private String github;
 
-    @NotBlank(message = ZOOMID_INVALID)
+    @NotBlank(message = ZOOM_ID_INVALID)
     private String zoomId;
 }
