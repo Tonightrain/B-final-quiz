@@ -1,12 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.component.Converter;
+import com.example.demo.domain.ChangeGroupNameRequest;
 import com.example.demo.domain.Group;
 import com.example.demo.domain.Trainee;
 import com.example.demo.domain.Trainer;
 import com.example.demo.entity.GroupEntity;
 import com.example.demo.entity.TraineeEntity;
 import com.example.demo.entity.TrainerEntity;
+import com.example.demo.exception.GroupIsNotExistException;
+import com.example.demo.exception.GroupNameIsExistException;
 import com.example.demo.exception.TrainerNumberIsLessThanTwoException;
 import com.example.demo.repository.GroupRepository;
 import com.example.demo.repository.TraineeRepository;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupService {
@@ -54,6 +58,7 @@ public class GroupService {
         for (TraineeEntity traineeEntity : students){
             GroupEntity groupEntity = groupRepository.findById(traineeGroup).get();
             groupEntity.getTraineeList().add(traineeEntity);
+            groupRepository.save(groupEntity);
             if (traineeGroup == groupNum) {
                 traineeGroup = 1;
             }else {
@@ -65,6 +70,7 @@ public class GroupService {
         for (TrainerEntity trainerEntity : teachers){
             GroupEntity groupEntity = groupRepository.findById(trainerGroup).get();
             groupEntity.getTrainerList().add(trainerEntity);
+            groupRepository.save(groupEntity);
             if (trainerGroup == groupNum) {
                 trainerGroup = 1;
             }else {
@@ -74,4 +80,22 @@ public class GroupService {
 
         return groups;
     }
+
+    public List<GroupEntity> getAllGroups() {
+        return groupRepository.findAll();
+    }
+
+    public void changeGroupName(long id,ChangeGroupNameRequest request) {
+        GroupEntity group = groupRepository.findById(id).orElseThrow(GroupIsNotExistException::new);
+        List<GroupEntity> groupEntities = groupRepository.findAll();
+        List<GroupEntity> repeatName = groupEntities.stream()
+                .filter(groupEntity -> groupEntity.getName().equals(request.getNewName()))
+                .collect(Collectors.toList());
+        if (repeatName.size() > 0) {
+            throw new GroupNameIsExistException();
+        }
+        group.setName(request.getNewName());
+        groupRepository.save(group);
+    }
+
 }

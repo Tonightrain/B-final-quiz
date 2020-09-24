@@ -1,13 +1,12 @@
 package com.example.demo.api;
 
+import com.example.demo.domain.ChangeGroupNameRequest;
 import com.example.demo.domain.Group;
 import com.example.demo.entity.GroupEntity;
 import com.example.demo.service.GroupService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +25,17 @@ public class GroupController {
     public List<GroupEntity> autoGrouping(){
         return groupService.autoGrouping();
     }
+
+    @GetMapping("/groups")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GroupEntity> getAllGroups() {
+        return groupService.getAllGroups();
+    }
+
+    @PatchMapping("/groups/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void changeGroupName(@PathVariable long id,@RequestBody ChangeGroupNameRequest request) {
+        groupService.changeGroupName(id,request);
+    }
+
 }

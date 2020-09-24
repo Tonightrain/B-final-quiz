@@ -1,9 +1,6 @@
 package com.example.demo.api;
 
-import com.example.demo.exception.ErrorResult;
-import com.example.demo.exception.TraineeIsNotExistException;
-import com.example.demo.exception.TrainerIsNotExistException;
-import com.example.demo.exception.TrainerNumberIsLessThanTwoException;
+import com.example.demo.exception.*;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +45,26 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(TrainerNumberIsLessThanTwoException.class)
     public ResponseEntity<ErrorResult> handleTrainer(TrainerNumberIsLessThanTwoException ex){
+        ErrorResult errorResult = ErrorResult.builder()
+                .message(ex.getMessage())
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(Response.SC_BAD_REQUEST)
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
+    @ExceptionHandler(GroupNameIsExistException.class)
+    public ResponseEntity<ErrorResult> handleGroupName(GroupNameIsExistException ex){
+        ErrorResult errorResult = ErrorResult.builder()
+                .message(ex.getMessage())
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(Response.SC_BAD_REQUEST)
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
+    @ExceptionHandler(GroupIsNotExistException.class)
+    public ResponseEntity<ErrorResult> handleGroup(GroupIsNotExistException ex){
         ErrorResult errorResult = ErrorResult.builder()
                 .message(ex.getMessage())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())

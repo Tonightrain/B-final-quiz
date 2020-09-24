@@ -10,4 +10,6 @@ public class ErrorMessage {
     public static final String TRAINEE_NOT_FOUND = "trainee is not exist";
     public static final String TRAINER_NOT_FOUND = "trainer is not exist";
     public static final String TRAINER_NUMBER_LESS = "trainer number is less than two";
+    public static final String GROUP_NAME_REPEAT = "group name is repeat";
+    public static final String GROUP_NOT_FOUND = "group is not exist";
 }
