@@ -49,6 +49,7 @@ public class GroupService {
         for (int i = 1; i <= groupNum; i++) {
             GroupEntity groupEntity = GroupEntity.builder().name(i+"组").build();
             groupRepository.save(groupEntity);
+
         }
         Collections.shuffle(teachers);
         Collections.shuffle(students);
@@ -58,6 +59,10 @@ public class GroupService {
         for (TraineeEntity traineeEntity : students){
             GroupEntity groupEntity = groupRepository.findById(traineeGroup).get();
             groupEntity.getTraineeList().add(traineeEntity);
+
+            traineeEntity.setGroupEntity(groupEntity);
+            traineeRepository.save(traineeEntity);
+
             groupRepository.save(groupEntity);
             if (traineeGroup == groupNum) {
                 traineeGroup = 1;
@@ -70,6 +75,8 @@ public class GroupService {
         for (TrainerEntity trainerEntity : teachers){
             GroupEntity groupEntity = groupRepository.findById(trainerGroup).get();
             groupEntity.getTrainerList().add(trainerEntity);
+            trainerEntity.setGroupEntity(groupEntity);
+            trainerRepository.save(trainerEntity);
             groupRepository.save(groupEntity);
             if (trainerGroup == groupNum) {
                 trainerGroup = 1;
