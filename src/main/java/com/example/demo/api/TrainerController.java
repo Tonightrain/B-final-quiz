@@ -23,6 +23,7 @@ public class TrainerController {
 
     @PostMapping("/trainers")
     @ResponseStatus(HttpStatus.CREATED)
+    // GTB：- Post的请求体应该使用对象来接收
     public List<TrainerEntity> addTrainer(@RequestBody @NotBlank String name){
         return trainerService.addTrainer(name);
     }

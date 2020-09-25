@@ -26,12 +26,14 @@ public class TraineeController {
 
     @DeleteMapping("/trainees/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    // GTB: - @PathVariable应该显式写明value属性
     public void deleteTrainee(@PathVariable long id){
         traineeService.deleteTrainee(id);
     }
 
     @GetMapping("/trainees")
     @ResponseStatus(HttpStatus.OK)
+    // GTB: - 接口错误：应该查询所有未分组学员，而非所有学员
     public List<Trainee> getAllTrainees(){
         return traineeService.getAllTrainees();
     }

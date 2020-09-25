@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChangeGroupNameRequest {
+        // GTB: - 修改组名时只需要传入新组名就行
         @JsonProperty(value = "oldName")
         private String oldName;
 

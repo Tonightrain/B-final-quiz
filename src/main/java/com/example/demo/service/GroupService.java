@@ -38,10 +38,12 @@ public class GroupService {
         this.trainerRepository = trainerRepository;
     }
 
+    // GTB: - 过长的方法，可以考虑抽取子方法
     public List<GroupEntity> autoGrouping() {
         List<TrainerEntity> teachers = trainerRepository.findAll();
         List<TraineeEntity> students = traineeRepository.findAll();
         groupRepository.deleteAll();
+        // GTB: - magic number
         if (teachers.size() < 2) {
             throw new TrainerNumberIsLessThanTwoException();
         }
@@ -95,6 +97,7 @@ public class GroupService {
     public void changeGroupName(long id,ChangeGroupNameRequest request) {
         GroupEntity group = groupRepository.findById(id).orElseThrow(GroupIsNotExistException::new);
         List<GroupEntity> groupEntities = groupRepository.findAll();
+        // GTB: - 可以用Stream的anyMatch方法来简化代码
         List<GroupEntity> repeatName = groupEntities.stream()
                 .filter(groupEntity -> groupEntity.getName().equals(request.getNewName()))
                 .collect(Collectors.toList());

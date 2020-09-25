@@ -56,6 +56,7 @@ public class TraineeService {
     public List<Trainee> getAllTrainees() {
         List<TraineeEntity> traineeEntityList = traineeRepository.findAll();
         List<Trainee> traineeList = traineeEntityList.stream()
+                // GTB: - 可以使用lambda表达式简化代码
                 .map((traineeEntity -> Converter.traineeEntityConvertToTrainee(traineeEntity)))
                 .collect(Collectors.toList());
         return traineeList;

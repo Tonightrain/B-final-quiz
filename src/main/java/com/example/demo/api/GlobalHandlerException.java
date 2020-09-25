@@ -33,6 +33,7 @@ public class GlobalHandlerException {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 
+    // GTB: - XxxNotFoundException的异常处理方法可以合并成一个
     @ExceptionHandler(TrainerIsNotExistException.class)
     public ResponseEntity<ErrorResult> handleTrainer(TrainerIsNotExistException ex){
         ErrorResult errorResult = ErrorResult.builder()
